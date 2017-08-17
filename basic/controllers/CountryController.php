@@ -120,5 +120,6 @@ class CountryController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+        $headers = Yii::$app->response->headers;
     }
 }

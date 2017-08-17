@@ -5,6 +5,7 @@ $db = require(__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
+    'defaultRoute' => 'site',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -39,14 +40,37 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'enablePrettyUrl' => true,  //开启url美化
+            'showScriptName' => false,  //隐藏index.php
+//            'suffix' => ".html",
             'rules' => [
+                'site/resetpwd/<token:.*?>/<nonce:\d+>/<time:\d+>'=>'site/resetpwd',
+                'site/getpass/<id:.*?>' => 'site/getpass',
+                'apitool/<id:.*?>'=>'apitrial/index',
+                //app sdk下载
+                'app/download/<category:\d+>/<version:\w.+>'=>'app/download',
+                //统计导出url处理
+                'stat/export/<appId:.*?>/<start:.*?>/<end:.*?>'=>'stat/export',
+                'stat/exportmsg/<appId:.*?>/<type:\d>/<start:.*?>/<end:.*?>'=>'stat/exportmsg',
+                'stat/indexnew/<server:\d>/<id:.*?>'=>'stat/indexnew',
+                'stat/business/<server:\d>/<id:.*?>'=>'stat/business',
+                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:.*?>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                //app 操作 单词一律必须小写
+                //'app/operview/<id:\d+>/<oper:\w+>'=>'app/operview',
+                //登陆页面
+                'signin/'=>'site/login',
+                //注册
+                'signup/'=>'site/signup',
+                'resetpwd/'=>'site/findpwd',
+                //密码重置
+                //  'site/resetpwd/<email:\w.+>/<id:\w.+>'=>'site/resetpwd',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
